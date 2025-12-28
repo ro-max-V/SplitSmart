@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SplitSmart - Expense Tracker</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Network Status Indicator -->
+    <div id="networkStatus" class="network-status network-online" style="display: none;">
+        <i class="bi bi-wifi"></i> Online
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="bi bi-calculator"></i> SplitSmart
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">
+                            <i class="bi bi-house"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#add-expense">
+                            <i class="bi bi-plus-circle"></i> Add Expense
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#expenses">
+                            <i class="bi bi-clock-history"></i> My Expenses
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#groups">
+                            <i class="bi bi-people"></i> Groups
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="bi bi-person"></i> Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1>Track your daily expenses easily</h1>
+                    <p>A simple and accessible way to manage your money with friends or individually. Split bills, track spending, and stay on budget.</p>
+                    <div class="hero-buttons">
+                        <a href="#add-expense" class="btn-hero">
+                            Get Started <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#features" class="btn-hero-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-illustration">
+                    <div class="illustration-bg">
+                        <i class="bi bi-phone" style="font-size: 4rem; color: rgba(255,255,255,0.8);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Everything you need to manage expenses</h2>
+            <p class="section-subtitle">Powerful features designed to make expense tracking simple and effective</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-journal-plus"></i>
+                        </div>
+                        <h5>Add & Track Expenses</h5>
+                        <p>Quickly add your daily expenses with detailed categorization and smart tracking.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h5>Split with Friends <span class="coming-soon">Coming Soon</span></h5>
+                        <p>Share expenses with friends and family. Calculate who owes what automatically.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-bar-chart"></i>
+                        </div>
+                        <h5>Simple Expense History</h5>
+                        <p>View your spending patterns with clear visualizations and detailed history.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-universal-access"></i>
+                        </div>
+                        <h5>Accessible & User Friendly</h5>
+                        <p>Designed for everyone with intuitive interface and accessibility features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Expenses Section -->
+    <section id="expenses" class="expense-section">
+        <div class="container">
+            <div class="expense-card">
+                <div class="expense-header">
+                    <div>
+                        <h2 class="expense-title">Recent Expenses</h2>
+                        <p class="text-muted">Keep track of your spending with detailed expense history</p>
+                    </div>
+                    <a href="#" class="view-all-btn">View All</a>
+                </div>
+
+                <!-- Error Recovery Section -->
+                <div id="dataErrorRecovery" class="error-recovery" style="display: none;">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-exclamation-triangle text-warning me-3" style="font-size: 1.5rem;"></i>
+                        <div class="flex-grow-1">
+                            <strong>Data Loading Issue</strong>
+                            <p class="mb-2">We encountered an issue loading your expenses. This might be due to corrupted data or storage limits.</p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-warning me-2" onclick="ErrorHandler.recoverData()">
+                            <i class="bi bi-arrow-clockwise"></i> Try Recovery
+                        </button>
+                        <button class="btn btn-outline-danger" onclick="ErrorHandler.clearCorruptedData()">
+                            <i class="bi bi-trash"></i> Clear Data
+                        </button>
+                    </div>
+                </div>
+
+                <div id="expensesList">
+                    <!-- Expenses will be loaded here -->
+                </div>
+
+                <div id="noExpensesMessage" style="display: none;">
+                    <div class="text-center py-5">
+                        <i class="bi bi-inbox" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                        <p class="text-muted">No expenses found. Add your first expense below!</p>
+                    </div>
+                </div>
+
+                <div id="loadingExpenses" class="text-center py-4" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Loading expenses...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Expense Form Section -->
+    <section id="add-expense" class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2 class="form-title">Add New Expense</h2>
+                <p class="form-subtitle">Quick and easy expense tracking</p>
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="feature-icon me-3" style="width: 40px; height: 40px;">
+                        <i class="bi bi-plus-circle"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-1">Add Expense</h5>
+                        <p class="text-muted mb-0">Fill in the details below to track your expense</p>
+                    </div>
+                </div>
+
+                <form id="expenseForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="description" name="description" 
+                                       placeholder="e.g., Coffee, Lunch, Groceries" required>
+                                <div class="error-message" id="descriptionError"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount (₹)</label>
+                                <input type="number" class="form-control" id="amount" name="amount" 
+                                       placeholder="0.00" min="0" step="0.01" required>
+                                <div class="error-message" id="amountError"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="paidBy" class="form-label">Paid By</label>
+                                <select class="form-control" id="paidBy" name="paidBy">
+                                    <option value="you">Select who paid</option>
+                                    <option value="you">You</option>
+                                    <option value="shared">Shared</option>
+                                    <option value="friend">Friend</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                                <div class="error-message" id="dateError"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Storage Warning -->
+                    <div id="storageWarning" class="alert alert-warning" style="display: none;">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <strong>Storage Warning:</strong> Local storage is nearly full. Consider exporting your data.
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom w-100" id="submitBtn">
+                        <i class="bi bi-plus-circle me-2"></i>Add Expense
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <i class="bi bi-calculator"></i> SplitSmart
+                    </div>
+                    <p class="footer-description">
+                        The easiest way to track expenses and split bills with friends. 
+                        Manage your money with confidence and transparency.
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="#home">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#terms">Terms</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-title">Features</h6>
+                    <ul class="footer-links">
+                        <li><a href="#features">Expense Tracking</a></li>
+                        <li><a href="#features">Bill Splitting</a></li>
+                        <li><a href="#features">Group Management</a></li>
+                        <li><a href="#features">Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <div class="d-flex justify-content-lg-end">
+                        <div>
+                            <a href="#" class="text-muted me-4">GitHub</a>
+                            <a href="#" class="text-muted me-4">Documentation</a>
+                            <a href="#" class="text-muted">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; SplitSmart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/

@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #0f172a;
+}
+
+.login-wrapper {
+    display: flex;
+    height: 100vh;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px;
+}
+
+/* LEFT */
+.login-left {
+    width: 50%;
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.left-content {
+    margin-top: 20%;
+}
+
+.login-left h1 {
+    font-size: 3.2rem;
+    margin-bottom: 30px;
+}
+
+.login-left p {
+    opacity: 0.9;
+    line-height: 1.6;
+    font-size: 1.3rem;
+}
+
+.features {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 1rem;
+}
+
+.features span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* RIGHT */
+.login-right {
+    width: 50%;
+    padding: 60px;
+}
+
+.login-right h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+label {
+    font-weight: 600;
+    margin-top: 20px;
+    display: block;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #e5e7eb;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 8px;
+}
+
+.input-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+.options a {
+    color: #4ba6f0;
+    text-decoration: none;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: #53d6ea;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    color: #94a3b8;
+}
+
+.social-login {
+    display: flex;
+    gap: 15px;
+}
+
+.social-login button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    cursor: pointer;
+}
+
+.signup {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.signup a {
+    color: #1075b9;
+    font-weight: 600;
+}
